@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C-LHOUETTE | Occasion Wear Rental</title>
+<style>
+:root{
+  --ink:#171717;
+  --muted:#6a6a70;
+  --cream:#faf7f4;
+  --pink:#f1dce5;
+  --line:#e7e0df;
+  --white:#fff;
+  --accent:#9a5d76;
+  --shadow:0 14px 40px rgba(30,20,25,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--cream)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+header{padding:22px 5%;display:flex;justify-content:space-between;align-items:center;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.logo{font-weight:900;letter-spacing:.14em;font-size:22px}
+.tag{font-size:13px;color:var(--muted)}
+.hero{padding:72px 5% 52px;max-width:1180px;margin:auto}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--accent);text-transform:uppercase}
+.hero h1{font-size:clamp(42px,7vw,78px);line-height:.95;max-width:850px;margin:10px 0 18px;letter-spacing:-.05em}
+.hero p{max-width:650px;color:var(--muted);font-size:17px;line-height:1.6}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:35px}
+.step{background:#fff;border:1px solid var(--line);padding:20px;border-radius:18px}
+.step b{display:block;margin-bottom:6px}
+.wrap{max-width:1180px;margin:auto;padding:0 5% 70px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--shadow)}
+.panel h2{margin:0 0 7px;font-size:28px}
+.helper{color:var(--muted);font-size:14px;line-height:1.5}
+.occasion-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.occasion-btn{border:1px solid var(--line);background:#fff;border-radius:17px;padding:20px 12px;text-align:left;transition:.2s}
+.occasion-btn:hover,.occasion-btn.active{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 20px rgba(30,20,25,.07)}
+.occasion-icon{font-size:24px;margin-bottom:15px}
+.occasion-btn strong{display:block}
+.occasion-btn span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.size-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.size-btn{min-width:58px;border:1px solid var(--line);background:#fff;padding:12px 16px;border-radius:999px;font-weight:800}
+.size-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.field label,.form-row label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}
+.field select,.field input,.form-row input,.form-row textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;outline:none}
+.field select:focus,.field input:focus,.form-row input:focus,.form-row textarea:focus{border-color:var(--accent)}
+.results{margin-top:28px}
+.results-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:18px}
+.results-head h2{margin:3px 0 6px}
+.reset{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 25px rgba(30,20,25,.05)}
+.photo{height:350px;background:#eee7e7;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:contain;display:block}
+.dress-shape{width:120px;height:250px;position:relative;opacity:.28}
+.dress-top{width:58px;height:85px;background:#555;border-radius:35px 35px 18px 18px;margin:auto}
+.dress-skirt{width:120px;height:145px;background:#777;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);margin-top:-4px}
+.photo-label{position:absolute;font-size:11px;color:#777;background:rgba(255,255,255,.75);padding:6px 9px;border-radius:999px}
+.info{padding:18px}
+.name{font-size:20px;font-weight:900}
+.meta{color:var(--muted);font-size:13px;line-height:1.5;margin:7px 0 12px}
+.price{font-weight:900;margin-bottom:14px}
+.reserve{width:100%;border:0;background:var(--ink);color:#fff;padding:13px;border-radius:12px;font-weight:800}
+.empty{background:#fff;border:1px dashed var(--line);padding:35px;text-align:center;border-radius:18px;color:var(--muted)}
+.ai-section{margin-top:35px}
+.ai-box{display:grid;grid-template-columns:1fr 1.3fr;gap:20px}
+.ai-chat{border:1px solid var(--line);border-radius:18px;background:#fafafa;min-height:430px;display:flex;flex-direction:column}
+.chat-log{padding:18px;overflow:auto;flex:1;max-height:390px}
+.msg{max-width:88%;padding:11px 13px;border-radius:15px;margin-bottom:10px;line-height:1.45;font-size:14px}
+.bot{background:#fff;border:1px solid var(--line)}
+.user{background:var(--ink);color:#fff;margin-left:auto}
+.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff}
+.chat-input input{flex:1;border:1px solid var(--line);border-radius:999px;padding:11px 14px}
+.chat-input button{border:0;background:var(--accent);color:#fff;border-radius:999px;padding:11px 17px;font-weight:800}
+.ai-info{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.ai-info h3{margin-top:0}
+.tip{background:#f7edf1;border-radius:14px;padding:14px;font-size:13px;color:#5d4650;line-height:1.5}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.48);z-index:50;padding:20px;align-items:center;justify-content:center}
+.modal.open{display:flex}
+.box{background:#fff;border-radius:22px;max-width:540px;width:100%;padding:25px;max-height:90vh;overflow:auto}
+.close{float:right;border:0;background:#eee7e7;border-radius:999px;padding:8px 12px}
+.form-row{margin:13px 0}
+.form-row textarea{min-height:90px;resize:vertical}
+.submit{width:100%;border:0;background:var(--ink);color:#fff;border-radius:12px;padding:14px;font-weight:900}
+.note{color:var(--muted);font-size:12px;line-height:1.5}
+footer{text-align:center;padding:30px;color:var(--muted);font-size:12px}
+@media(max-width:850px){
+  .occasion-grid{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .controls{grid-template-columns:repeat(2,1fr)}
+  .ai-box{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  header{align-items:flex-start;gap:10px;flex-direction:column}
+  .steps,.grid,.controls{grid-template-columns:1fr}
+  .occasion-grid{grid-template-columns:1fr 1fr}
+  .photo{height:310px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">C-LHOUETTE</div>
+  <div class="tag">occasion wear, without the commitment.</div>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">OCCASION WEAR RENTAL</p>
+  <h1>Find the look.<br>Rent the moment.</h1>
+  <p>Browse occasion outfits by event, size, style, budget, and date. Get a quick stylist recommendation before you reserve.</p>
+  <div class="steps">
+    <div class="step"><b>01 — Choose occasion</b><span class="helper">Birthday, graduation, wedding, dinner, or casual night.</span></div>
+    <div class="step"><b>02 — Choose size</b><span class="helper">Only dresses available in your selected size will appear.</span></div>
+    <div class="step"><b>03 — Find your look</b><span class="helper">Use the filters or ask our C-LHOUETTE Stylist.</span></div>
+  </div>
+</section>
+
+<main class="wrap">
+  <section class="panel">
+    <p class="eyebrow">START HERE</p>
+    <h2>What are you dressing for?</h2>
+    <p class="helper">Choose an occasion first, then choose your size.</p>
+    <div class="occasion-grid" id="occasionButtons"></div>
+
+    <div id="sizeArea" style="display:none;margin-top:30px">
+      <p class="eyebrow">YOUR SIZE</p>
+      <h2 style="font-size:23px">What size do you need?</h2>
+      <div class="size-row" id="sizeButtons"></div>
+    </div>
+
+    <div id="filterArea" style="display:none">
+      <div class="controls">
+        <div class="field">
+          <label>Budget</label>
+          <select id="budget"><option value="">Any budget</option></select>
+        </div>
+        <div class="field">
+          <label>Style</label>
+          <select id="style"><option value="">Any style</option></select>
+        </div>
+        <div class="field">
+          <label>Event date</label>
+          <input id="date" type="date">
+        </div>
+        <div class="field">
+          <label>Availability</label>
+          <select id="availability"><option value="">Any status</option></select>
+        </div>
+      </div>
+
+      <section class="results">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">YOUR MATCHES</p>
+            <h2>Available dresses for you</h2>
+            <p class="helper" id="selectionText"></p>
+          </div>
+          <button class="reset" onclick="resetFilters()">← Start over</button>
+        </div>
+        <div class="grid" id="catalog"></div>
+      </section>
+    </div>
+  </section>
+
+  <section class="ai-section panel">
+    <p class="eyebrow">C-LHOUETTE STYLIST</p>
+    <h2>Not sure what would look good?</h2>
+    <p class="helper">Tell the stylist about your event, skin tone, style preference, size, or budget. It will recommend dresses from the current C-LHOUETTE collection.</p>
+    <div class="ai-box">
+      <div class="ai-chat">
+        <div class="chat-log" id="chatLog">
+          <div class="msg bot">Hi! I'm the C-LHOUETTE Stylist. 💗 Tell me something like: “I have tan skin, I'm going to a wedding, size M, and I want something elegant under ₱900.”</div>
+        </div>
+        <div class="chat-input">
+          <input id="chatInput" placeholder="Ask about your look..." onkeydown="if(event.key==='Enter')askStylist()">
+          <button onclick="askStylist()">Ask</button>
+        </div>
+      </div>
+      <div class="ai-info">
+        <h3>How the stylist works</h3>
+        <p class="helper">The stylist uses the information you provide and matches it with the C-LHOUETTE collection. It can consider:</p>
+        <ul class="helper">
+          <li>Occasion</li>
+          <li>Size</li>
+          <li>Budget</li>
+          <li>Style preference</li>
+          <li>Skin-tone preference</li>
+          <li>Keywords such as elegant, trendy, romantic, classic, minimalist, satin, etc.</li>
+        </ul>
+        <div class="tip"><b>Tip:</b> You can add more dress information in the INVENTORY section of this file, including colors and skin-tone-friendly colors. The stylist will then use those details in its recommendations.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="modal">
+  <div class="box">
+    <button class="close" onclick="closeModal()">Close</button>
+    <p class="eyebrow">RESERVE / INQUIRE</p>
+    <h2 id="selectedTitle">Reservation request</h2>
+    <p class="note" id="selectedDetails"></p>
+    <form id="reservationForm" onsubmit="submitInquiry(event)">
+      <div class="form-row"><label>Name</label><input id="customerName" required placeholder="Your name"></div>
+      <div class="form-row"><label>Email</label><input id="customerEmail" required type="email" placeholder="you@email.com"></div>
+      <div class="form-row"><label>Event date</label><input id="formDate" required type="date"></div>
+      <div class="form-row"><label>Message</label><textarea id="customerMessage" placeholder="Questions or special requests"></textarea></div>
+      <button class="submit" id="submitBtn">Send Reservation Request</button>
+    </form>
+    <p class="note">Payment is not processed on the website. This form sends the reservation request to the C-LHOUETTE Gmail inbox.</p>
+  </div>
+</div>
+
+<footer>C-LHOUETTE • Occasion Wear Rental • Find the look. Rent the moment.</footer>
+
+<script>
+/* =========================================================
+   EASY EDIT AREA
+   ---------------------------------------------------------
+   You can change the filter options here without changing
+   the rest of the website.
+   ========================================================= */
+
+const OCCASIONS = [
+  {name:"Birthday", icon:"🎂", desc:"Cute, fun, and photo-ready"},
+  {name:"Graduation", icon:"🎓", desc:"A special look for the milestone"},
+  {name:"Casual Night", icon:"🌙", desc:"For nights out and casual plans"},
+  {name:"Wedding", icon:"💐", desc:"Elegant guest looks"},
+  {name:"Dinner", icon:"🍷", desc:"Polished looks for dinner dates"}
+];
+
+const SIZES = ["XS","S","M","L","XL"];
+
+/* Add/remove style options here. */
+const STYLES = ["Elegant","Trendy","Minimalist","Romantic","Classic"];
+
+/* Change availability labels here if your business changes them. */
+const AVAILABILITIES = ["available","soon"];
+
+/* =========================================================
+   INVENTORY
+   ---------------------------------------------------------
+   THIS is the section you will edit when adding dresses.
+
+   image:
+   - Upload the image to the same GitHub folder as index.html.
+   - Put the exact filename here.
+   - Example: image:"muse-dress.jpg"
+
+   color / bestForSkin:
+   - These help the Stylist make recommendations.
+   - You can add more colors/skin-tone tags later.
+   ========================================================= */
+
+const dresses = [
+  {
+    name:"The Muse Dress",
+    image:"the muse dress.jpg",
+    size:["S","M"],
+    occasion:["Wedding","Dinner"],
+    budget:850,
+    style:"Elegant",
+    color:"Dusty rose",
+    bestForSkin:["fair","medium","tan","deep"],
+    keywords:["wedding guest","romantic","soft","feminine","dressy"],
+    days:[1,3,5,7,10,12,15,18,20,22,25],
+    availability:"available"
+  },
+  {
+    name:"Afterglow Mini",
+    image:"",
+    size:["XS","S","M"],
+    occasion:["Birthday","Casual Night"],
+    budget:650,
+    style:"Trendy",
+    color:"Black",
+    bestForSkin:["fair","medium","tan","deep"],
+    keywords:["fun","night out","party","cute"],
+    days:[2,4,6,8,11,14,17,21,24,27],
+    availability:"available"
+  },
+  {
+    name:"Sunday Satin",
+    image:"",
+    size:["M","L"],
+    occasion:["Wedding","Dinner"],
+    budget:750,
+    style:"Minimalist",
+    color:"Champagne",
+    bestForSkin:["fair","medium","tan"],
+    keywords:["satin","clean","simple","elegant"],
+    days:[1,4,9,13,16,19,23,26],
+    availability:"available"
+  },
+  {
+    name:"Petal Hour",
+    image:"",
+    size:["XS","S"],
+    occasion:["Birthday","Wedding"],
+    budget:550,
+    style:"Romantic",
+    color:"Blush pink",
+    bestForSkin:["fair","medium","tan"],
+    keywords:["soft","floral","feminine","romantic"],
+    days:[5,8,12,15,18,22,28],
+    availability:"available"
+  },
+  {
+    name:"The Valedict",
+    image:"",
+    size:["S","M","L"],
+    occasion:["Graduation","Dinner"],
+    budget:900,
+    style:"Classic",
+    color:"Navy",
+    bestForSkin:["fair","medium","tan","deep"],
+    keywords:["graduation","polished","classic","formal"],
+    days:[2,7,10,14,17,21,25,29],
+    availability:"available"
+  },
+  {
+    name:"Midnight Edit",
+    image:"",
+    size:["M","L","XL"],
+    occasion:["Casual Night","Dinner"],
+    budget:1100,
+    style:"Trendy",
+    color:"Black",
+    bestForSkin:["fair","medium","tan","deep"],
+    keywords:["night out","bold","party","sleek"],
+    days:[1,6,11,16,20,24,30],
+    availability:"available"
+  },
+  {
+    name:"Soft Focus",
+    image:"",
+    size:["XS","S","M"],
+    occasion:["Graduation","Birthday"],
+    budget:600,
+    style:"Minimalist",
+    color:"Ivory",
+    bestForSkin:["fair","medium","tan"],
+    keywords:["simple","clean","soft","graduation"],
+    days:[4,8,13,17,20,27],
+    availability:"available"
+  },
+  {
+    name:"Rose Theory",
+    image:"",
+    size:["M","L"],
+    occasion:["Wedding","Birthday"],
+    budget:800,
+    style:"Romantic",
+    color:"Rose",
+    bestForSkin:["fair","medium","tan"],
+    keywords:["romantic","floral","soft","feminine"],
+    days:[2,5,9,15,19,26],
+    availability:"soon"
+  },
+  {
+    name:"City Classic",
+    image:"",
+    size:["S","M","L"],
+    occasion:["Casual Night","Dinner"],
+    budget:700,
+    style:"Classic",
+    color:"Emerald",
+    bestForSkin:["medium","tan","deep"],
+    keywords:["city","polished","dinner","night out"],
+    days:[3,7,12,17,22,28],
+    availability:"available"
+  }
+];
+
+/* =========================================================
+   RESERVATION SYSTEM
+   ========================================================= */
+const RESERVATION_URL = "https://script.google.com/macros/s/AKfycbzE3i3KJI9BneKa1tklbuKULHbtxJoQrg2c5NffoIzw0wKDnWvDn9_iVuabGwx9FL56/exec";
+
+let selectedDress = null;
+let selectedOccasion = "";
+let selectedSize = "";
+
+function init(){
+  renderOccasions();
+  renderSizes();
+  populateFilters();
+  document.getElementById("budget").onchange=render;
+  document.getElementById("style").onchange=render;
+  document.getElementById("date").onchange=render;
+  document.getElementById("availability").onchange=render;
+}
+function renderOccasions(){
+  document.getElementById("occasionButtons").innerHTML=OCCASIONS.map(o=>`
+    <button class="occasion-btn" onclick="chooseOccasion('${o.name.replace(/'/g,"\\'")}',this)">
+      <div class="occasion-icon">${o.icon}</div>
+      <strong>${o.name}</strong>
+      <span>${o.desc}</span>
+    </button>`).join("");
+}
+function renderSizes(){
+  document.getElementById("sizeButtons").innerHTML=SIZES.map(s=>`
+    <button class="size-btn" onclick="chooseSize('${s}',this)">${s}</button>`).join("");
+}
+function populateFilters(){
+  const budgetValues=[...new Set(dresses.map(d=>d.budget))].sort((a,b)=>a-b);
+  document.getElementById("budget").innerHTML='<option value="">Any budget</option>'+budgetValues.map(v=>`<option value="${v}">Up to ₱${Number(v).toLocaleString()}</option>`).join("");
+  document.getElementById("style").innerHTML='<option value="">Any style</option>'+STYLES.map(s=>`<option>${s}</option>`).join("");
+  document.getElementById("availability").innerHTML='<option value="">Any status</option>'+AVAILABILITIES.map(a=>`<option value="${a}">${a==="available"?"Available now":"Coming soon"}</option>`).join("");
+}
+function chooseOccasion(o,btn){
+  selectedOccasion=o;
+  document.querySelectorAll(".occasion-btn").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("sizeArea").style.display="block";
+  document.getElementById("filterArea").style.display="none";
+  document.querySelector(".size-row").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function chooseSize(s,btn){
+  selectedSize=s;
+  document.querySelectorAll(".size-btn").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("filterArea").style.display="block";
+  render();
+  document.getElementById("filterArea").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function resetFilters(){
+  selectedOccasion="";
+  selectedSize="";
+  document.getElementById("filterArea").style.display="none";
+  document.getElementById("sizeArea").style.display="none";
+  document.querySelectorAll(".occasion-btn,.size-btn").forEach(x=>x.classList.remove("active"));
+  document.getElementById("budget").value="";
+  document.getElementById("style").value="";
+  document.getElementById("date").value="";
+  document.getElementById("availability").value="";
+  window.scrollTo({top:document.querySelector(".panel").offsetTop-80,behavior:"smooth"});
+}
+function matches(d){
+  if(!selectedOccasion || !d.occasion.includes(selectedOccasion)) return false;
+  if(!selectedSize || !d.size.includes(selectedSize)) return false;
+  const b=document.getElementById("budget").value;
+  const st=document.getElementById("style").value;
+  const date=document.getElementById("date").value;
+  const a=document.getElementById("availability").value;
+  if(b && d.budget>Number(b)) return false;
+  if(st && d.style!==st) return false;
+  if(a && d.availability!==a) return false;
+  if(date){
+    const day=new Date(date+"T00:00:00").getDate();
+    if(!d.days.includes(day)) return false;
+  }
+  return true;
+}
+function render(){
+  const list=dresses.filter(matches);
+  const cat=document.getElementById("catalog");
+  let summary=`Showing ${selectedOccasion} dresses available in size ${selectedSize}`;
+  const b=document.getElementById("budget").value;
+  const st=document.getElementById("style").value;
+  const date=document.getElementById("date").value;
+  const a=document.getElementById("availability").value;
+  if(b) summary+=`, up to ₱${Number(b).toLocaleString()}`;
+  if(st) summary+=`, ${st.toLowerCase()} style`;
+  if(date) summary+=`, for your selected event date`;
+  if(a) summary+=`, ${a==="available"?"available now":"coming soon"}`;
+  document.getElementById("selectionText").textContent=summary+".";
+  cat.innerHTML=list.length ? list.map(d=>`
+    <article class="card">
+      <div class="photo">
+        ${d.image ? `<img src="${d.image}" alt="${d.name}">` :
+        `<div class="dress-shape"><div class="dress-top"></div><div class="dress-skirt"></div></div><div class="photo-label">Upload a product photo</div>`}
+      </div>
+      <div class="info">
+        <div class="name">${d.name}</div>
+        <div class="meta">${d.style} • ${d.occasion.join(" / ")}<br>Color: ${d.color || "Not specified"}<br>Available in: ${d.size.join(", ")} • ${d.availability==="available"?"Available":"Coming soon"}</div>
+        <div class="price">₱${d.budget.toLocaleString()} / event</div>
+        <button class="reserve" onclick='openModal(${JSON.stringify(d.name)})'>Reserve / Inquire</button>
+      </div>
+    </article>`).join("") :
+    `<div class="empty">No dresses match all of your selected options.<br>Try changing your size, budget, style, date, or availability.</div>`;
+}
+
+/* =========================================================
+   RESERVATION MODAL
+   ========================================================= */
+function openModal(name){
+  selectedDress=dresses.find(d=>d.name===name);
+  if(!selectedDress)return;
+  document.getElementById("selectedTitle").textContent="Reserve / Inquire — "+selectedDress.name;
+  document.getElementById("selectedDetails").textContent=`${selectedDress.style} • ${selectedDress.color || "Color not specified"} • ${selectedDress.occasion.join(" / ")} • ₱${selectedDress.budget.toLocaleString()} / event • Size ${selectedSize}`;
+  document.getElementById("formDate").value=document.getElementById("date").value || "";
+  document.getElementById("modal").classList.add("open");
+}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+async function submitInquiry(e){
+  e.preventDefault();
+  if(!selectedDress)return;
+  const btn=document.getElementById("submitBtn");
+  btn.disabled=true;
+  btn.textContent="Sending...";
+  const params=new URLSearchParams({
+    customerName:document.getElementById("customerName").value,
+    customerEmail:document.getElementById("customerEmail").value,
+    dressName:selectedDress.name,
+    size:selectedSize,
+    occasion:selectedOccasion,
+    budget:"₱"+selectedDress.budget,
+    style:selectedDress.style,
+    eventDate:document.getElementById("formDate").value,
+    message:document.getElementById("customerMessage").value
+  });
+  try{
+    await fetch(RESERVATION_URL,{method:"POST",mode:"no-cors",body:params});
+    alert("Reservation request sent! Please wait for C-LHOUETTE to confirm your request.");
+    document.getElementById("reservationForm").reset();
+    closeModal();
+  }catch(err){
+    alert("The request could not be sent. Please try again.");
+  }finally{
+    btn.disabled=false;
+    btn.textContent="Send Reservation Request";
+  }
+}
+window.addEventListener("click",e=>{if(e.target===document.getElementById("modal"))closeModal()});
+
+/* =========================================================
+   C-LHOUETTE STYLIST
+   ---------------------------------------------------------
+   This is the C-LHOUETTE Stylist.
+   It gives personalized recommendations based on the customer's preferences.
+
+   IMPORTANT:
+   The stylist is designed to help customers choose from the current C-LHOUETTE collection.
+   ========================================================= */
+function addChat(text,type){
+  const log=document.getElementById("chatLog");
+  const div=document.createElement("div");
+  div.className="msg "+type;
+  div.textContent=text;
+  log.appendChild(div);
+  log.scrollTop=log.scrollHeight;
+}
+function parseStylist(text){
+  const t=text.toLowerCase();
+  let occasion="";
+  if(t.includes("wedding")) occasion="Wedding";
+  else if(t.includes("graduation")||t.includes("grad")) occasion="Graduation";
+  else if(t.includes("birthday")||t.includes("bday")) occasion="Birthday";
+  else if(t.includes("casual night")||t.includes("night out")||t.includes("party")) occasion="Casual Night";
+  else if(t.includes("dinner")||t.includes("date")) occasion="Dinner";
+
+  let size="";
+  SIZES.forEach(s=>{if(new RegExp("\\b"+s.toLowerCase()+"\\b").test(t))size=s});
+
+  let budget=null;
+  const peso=t.match(/(?:₱|php|p)\s?([0-9,]+)/i);
+  const under=t.match(/(?:under|below|up to|max|maximum|less than)\s*(?:₱|php|p)?\s?([0-9,]+)/i);
+  if(under) budget=Number(under[1].replace(/,/g,""));
+  else if(peso) budget=Number(peso[1].replace(/,/g,""));
+
+  let style="";
+  for(const s of STYLES) if(t.includes(s.toLowerCase())) style=s;
+
+  let skin="";
+  if(t.includes("tan")||t.includes("morena")||t.includes("medium skin")) skin="tan";
+  else if(t.includes("deep")||t.includes("dark skin")) skin="deep";
+  else if(t.includes("fair")||t.includes("light skin")) skin="fair";
+  else if(t.includes("medium")) skin="medium";
+
+  const keywordList=["elegant","trendy","romantic","classic","minimalist","satin","floral","bold","soft","simple","formal","night out","graduation","wedding guest"];
+  const keywords=keywordList.filter(k=>t.includes(k));
+
+  return {occasion,size,budget,style,skin,keywords};
+}
+function recommend(text){
+  const p=parseStylist(text);
+  let pool=[...dresses];
+  if(p.occasion) pool=pool.filter(d=>d.occasion.includes(p.occasion));
+  if(p.size) pool=pool.filter(d=>d.size.includes(p.size));
+  if(p.budget) pool=pool.filter(d=>d.budget<=p.budget);
+  if(p.style) pool=pool.filter(d=>d.style===p.style);
+  if(p.skin) pool=pool.filter(d=>!d.bestForSkin || d.bestForSkin.includes(p.skin));
+
+  const scored=pool.map(d=>{
+    let score=0;
+    if(p.occasion && d.occasion.includes(p.occasion))score+=5;
+    if(p.size && d.size.includes(p.size))score+=5;
+    if(p.budget && d.budget<=p.budget)score+=3;
+    if(p.style && d.style===p.style)score+=4;
+    if(p.skin && d.bestForSkin && d.bestForSkin.includes(p.skin))score+=3;
+    p.keywords.forEach(k=>{if((d.keywords||[]).includes(k))score+=2});
+    return {...d,score};
+  }).sort((a,b)=>b.score-a.score);
+
+  if(!scored.length){
+    return "I couldn't find an exact match in the current inventory. 💗 Try a different size, a higher budget, or tell me whether you'd prefer elegant, trendy, romantic, classic, or minimalist.";
+  }
+
+  const top=scored.slice(0,3);
+  let response="Based on what you told me, I'd look at:\n\n";
+  response+=top.map((d,i)=>`${i+1}. ${d.name} — ${d.style}, ${d.color || "color not specified"}, ₱${d.budget.toLocaleString()}/event. ${d.availability==="available"?"Currently available.":"Coming soon."}`).join("\n");
+  if(p.skin) response+=`\n\nFor ${p.skin} skin, I prioritized pieces tagged in our inventory as suitable for that tone.`;
+  if(p.occasion) response+=`\nFor your ${p.occasion.toLowerCase()}, my strongest pick is ${top[0].name}.`;
+  response+="\n\nIf you want, tell me more about the vibe you want and I'll narrow it down further. ✨";
+  return response;
+}
+function askStylist(){
+  const input=document.getElementById("chatInput");
+  const text=input.value.trim();
+  if(!text)return;
+  addChat(text,"user");
+  input.value="";
+  setTimeout(()=>addChat(recommend(text),"bot"),250);
+}
+
+init();
+</script>
+</body>
+</html>
