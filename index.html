@@ -6,122 +6,23 @@
 <title>C-LHOUETTE | Occasion Wear Rental</title>
 <style>
 :root{--ink:#171717;--muted:#6f6a70;--cream:#faf7f4;--pink:#f1dce5;--line:#e7e0df;--white:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--cream)}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--cream)}
 header{padding:24px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);background:#fff}
 .logo{font-weight:900;letter-spacing:.12em;font-size:22px}.tag{font-size:13px;color:var(--muted)}
-.hero{padding:55px 5% 40px;max-width:1100px;margin:auto}
-.hero h1{font-size:clamp(38px,7vw,76px);line-height:.95;margin:0 0 16px;letter-spacing:-.05em}
-.hero p{max-width:620px;color:var(--muted);font-size:17px;line-height:1.6}
+.hero{padding:55px 5% 35px;max-width:1100px;margin:auto}.hero h1{font-size:clamp(38px,7vw,76px);line-height:.95;margin:0 0 16px;letter-spacing:-.05em}.hero p{max-width:680px;color:var(--muted);font-size:17px;line-height:1.6}
 .wrap{max-width:1200px;margin:auto;padding:0 5% 60px}
-.filters{background:#fff;border:1px solid var(--line);padding:20px;border-radius:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-select,input{width:100%;margin-top:7px;padding:12px;border:1px solid #d9d1d0;border-radius:10px;background:#fff;font:inherit}
-.filter-actions{grid-column:1/-1;display:flex;gap:10px;align-items:center}
-button{border:0;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer}
-.reset{background:#eee7e7}.count{margin-left:auto;color:var(--muted);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
-.photo{height:330px;background:linear-gradient(135deg,#e8dce1,#f5eeea);display:flex;align-items:center;justify-content:center;font-size:13px;color:#766d72;text-align:center;padding:20px}
-.photo span{border:1px dashed #b9adb1;padding:12px;border-radius:10px}
-.info{padding:18px}.name{font-size:19px;font-weight:900}.meta{color:var(--muted);font-size:13px;margin:6px 0 14px;line-height:1.5}
-.price{font-weight:900;margin-bottom:14px}.reserve{width:100%;background:var(--ink);color:#fff}
-.empty{grid-column:1/-1;text-align:center;padding:50px;background:#fff;border-radius:18px;color:var(--muted)}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10;padding:20px;align-items:center;justify-content:center}
-.modal.open{display:flex}.box{background:#fff;max-width:520px;width:100%;border-radius:20px;padding:25px;max-height:90vh;overflow:auto}
-.box h2{margin-top:0}.close{float:right;background:#eee}.form-row{margin:12px 0}.submit{background:var(--ink);color:#fff;width:100%;margin-top:10px}
-.note{font-size:12px;color:var(--muted);line-height:1.5}
-footer{text-align:center;padding:30px;color:var(--muted);font-size:13px}
-
-.steps{max-width:1200px;margin:0 auto 28px;display:flex;gap:8px}
-.step{flex:1;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:#aaa;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
-.step.active{background:var(--ink);color:#fff}.step span{font-weight:700;margin-left:5px}
-.chooser,.catalog-section{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;margin-bottom:30px}
-.eyebrow{font-size:11px;letter-spacing:.14em;font-weight:900;color:var(--muted);margin:0 0 7px}
-.chooser h2,.catalog-section h2{margin:0 0 8px;font-size:28px;letter-spacing:-.03em}
-.chooser p,.catalog-section p{color:var(--muted);margin:0;line-h<main class="wrap">
-<div class="steps">
-  <div class="step active" id="step1">1 <span>Choose occasion</span></div>
-  <div class="step" id="step2">2 <span>Choose size</span></div>
-  <div class="step" id="step3">3 <span>Browse your looks</span></div>
-</div>
-
-<section class="chooser" id="occasionChooser">
-  <div class="chooser-head">
-    <div>
-      <p class="eyebrow">STEP 01</p>
-      <h2>What are you dressing for?</h2>
-      <p>Pick your celebration and we'll only show dresses that fit the occasion.</p>
-    </div>
-  </div>
-  <div class="occasion-grid">
-    <button class="occasion-card" onclick="chooseOccasion('Birthday')">
-      <span class="occasion-icon">✦</span><b>Birthday</b><small>Fun, stylish looks</small>
-    </button>
-    <button class="occasion-card" onclick="chooseOccasion('Graduation')">
-      <span class="occasion-icon">✧</span><b>Graduation</b><small>Polished celebration looks</small>
-    </button>
-    <button class="occasion-card" onclick="chooseOccasion('Casual Night')">
-      <span class="occasion-icon">♡</span><b>Casual Night</b><small>Easy night-out looks</small>
-    </button>
-    <button class="occasion-card" onclick="chooseOccasion('Wedding')">
-      <span class="occasion-icon">◌</span><b>Wedding</b><small>Elegant guest looks</small>
-    </button>
-    <button class="occasion-card" onclick="chooseOccasion('Dinner')">
-      <span class="occasion-icon">⌁</span><b>Dinner</b><small>Chic evening looks</small>
-    </button>
-  </div>
-</section>
-
-<section class="chooser hidden" id="sizeChooser">
-  <div class="chooser-head">
-    <div>
-      <p class="eyebrow">STEP 02</p>
-      <h2>What size do you need?</h2>
-      <p>We'll narrow the catalog down to dresses available in your chosen size.</p>
-    </div>
-    <button class="back-btn" onclick="backToOccasions()">← Change occasion</button>
-  </div>
-  <div class="size-grid">
-    <button onclick="chooseSize('XS')">XS</button>
-    <button onclick="chooseSize('S')">S</button>
-    <button onclick="chooseSize('M')">M</button>
-    <button onclick="chooseSize('L')">L</button>
-    <button onclick="chooseSize('XL')">XL</button>
-  </div>
-</section>
-
-<section class="catalog-section hidden" id="catalogSection">
-  <div class="catalog-top">
-    <div>
-      <p class="eyebrow">STEP 03</p>
-      <h2>Your C-LHOUETTE picks</h2>
-      <p id="selectionText"></p>
-    </div>
-    <div class="catalog-actions">
-      <button class="small-btn" onclick="backToSizes()">Change size</button>
-      <button class="small-btn" onclick="backToOccasions()">Change occasion</button>
-    </div>
-  </div>
-
-  <div class="secondary-filters">
-    <label>Budget
-      <select id="budget"><option value="">Any budget</option><option value="500">Up to ₱500</option><option value="800">Up to ₱800</option><option value="1200">Up to ₱1,200</option></select>
-    </label>
-    <label>Style
-      <select id="style"><option value="">All styles</option><option>Minimalist</option><option>Elegant</option><option>Trendy</option><option>Romantic</option><option>Classic</option></select>
-    </label>
-    <label>Event date
-      <input id="date" type="date">
-    </label>
-    <label>Availability
-      <select id="availability"><option value="">Any availability</option><option value="available">Available</option><option value="soon">Coming soon</option></select>
-    </label>
-  </div>
-  <div class="grid" id="catalog"></div>
-</section>
-</main>
-a(max-width:800px){.filters{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr 1fr}.photo{height:280px}}
-@media(max-width:560px){.filters{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero{padding-top:38px}.filter-actions{flex-wrap:wrap}.count{margin-left:0;width:100%}}
+.filter-panel{background:#fff;border:1px solid var(--line);padding:26px;border-radius:22px;margin-bottom:30px}
+.filter-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:20px}.eyebrow{font-size:11px;letter-spacing:.14em;font-weight:900;color:var(--muted);margin:0 0 7px}.filter-head h2,.results-head h2{margin:0;font-size:28px;letter-spacing:-.03em}.filter-head p,.results-head p{color:var(--muted);margin:7px 0 0;line-height:1.5}
+.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.field label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.field select,.field input{width:100%;margin-top:7px;padding:13px;border:1px solid #d9d1d0;border-radius:11px;background:#fff;font:inherit}
+.filter-actions{display:flex;gap:10px;align-items:center;margin-top:18px}.find-btn{background:var(--ink);color:#fff;padding:14px 22px}.reset{background:#eee7e7}.helper{font-size:13px;color:var(--muted)}
+.results{display:none}.results.show{display:block}.results-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}.result-summary{font-size:13px;color:var(--muted);margin-top:5px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}.photo{height:330px;background:linear-gradient(135deg,#eadfe4,#f5eeea);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.photo .dress-shape{width:115px;height:220px;position:relative}.dress-top{position:absolute;left:32px;top:0;width:51px;height:65px;border-radius:18px 18px 10px 10px;background:#d9b9c7}.dress-skirt{position:absolute;left:8px;top:55px;width:100px;height:160px;background:#c99faf;clip-path:polygon(32% 0,68% 0,100% 100%,0 100%);border-radius:0 0 15px 15px}.photo-label{position:absolute;bottom:14px;left:14px;right:14px;text-align:center;font-size:11px;color:#766d72;background:rgba(255,255,255,.72);padding:7px;border-radius:9px}
+.info{padding:18px}.name{font-size:19px;font-weight:900}.meta{color:var(--muted);font-size:13px;margin:6px 0 14px;line-height:1.5}.price{font-weight:900;margin-bottom:14px}.reserve{width:100%;background:var(--ink);color:#fff}
+.empty{text-align:center;padding:50px;background:#fff;border-radius:18px;color:var(--muted);border:1px solid var(--line)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:10;padding:20px;align-items:center;justify-content:center}.modal.open{display:flex}.box{background:#fff;max-width:520px;width:100%;border-radius:20px;padding:25px;max-height:90vh;overflow:auto}.box h2{margin-top:0}.close{float:right;background:#eee}.form-row{margin:12px 0}.form-row label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.form-row input{width:100%;margin-top:7px;padding:12px;border:1px solid #d9d1d0;border-radius:10px;font:inherit}.submit{background:var(--ink);color:#fff;width:100%;margin-top:10px;padding:13px}.note{font-size:12px;color:var(--muted);line-height:1.5}footer{text-align:center;padding:30px;color:var(--muted);font-size:13px}
+@media(max-width:800px){.filters{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr 1fr}.photo{height:280px}.filter-head,.results-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.filters{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.hero{padding-top:38px}.filter-actions{flex-wrap:wrap}.find-btn{width:100%}.helper{width:100%}.tag{display:none}}
 </style>
 </head>
 <body>
@@ -129,20 +30,46 @@ a(max-width:800px){.filters{grid-template-columns:1fr 1fr}.grid{grid-template-co
 
 <section class="hero">
 <h1>Find the look.<br>Rent the moment.</h1>
-<p>Browse occasion dresses by size, event, style, budget, and date. A student prototype for a more practical way to prepare for weddings, graduations, birthdays, dinners, and nights out.</p>
+<p>Tell us what you need for your event, and C-LHOUETTE will show you the occasion dresses that match your choices.</p>
 </section>
 
 <main class="wrap">
-<div class="filters">
-<div><label>Size</label><select id="size"><option value="">All sizes</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></div>
-<div><label>Occasion</label><select id="occasion"><option value="">All occasions</option><option>Wedding</option><option>Graduation</option><option>Birthday</option><option>Dinner</option><option>Party</option></select></div>
-<div><label>Budget</label><select id="budget"><option value="">Any budget</option><option value="500">Up to ₱500</option><option value="800">Up to ₱800</option><option value="1200">Up to ₱1,200</option><option value="99999">Any price</option></select></div>
-<div><label>Style</label><select id="style"><option value="">All styles</option><option>Minimalist</option><option>Elegant</option><option>Trendy</option><option>Romantic</option><option>Classic</option></select></div>
-<div><label>Event date</label><input id="date" type="date"></div>
-<div><label>Availability</label><select id="availability"><option value="">Any availability</option><option value="available">Available</option><option value="soon">Coming soon</option></select></div>
-<div class="filter-actions"><button class="reset" onclick="resetFilters()">Reset filters</button><div class="count" id="count"></div></div>
-</div>
-<div class="grid" id="catalog"></div>
+<section class="filter-panel">
+  <div class="filter-head">
+    <div>
+      <p class="eyebrow">FIND YOUR DRESS</p>
+      <h2>Start with your event details</h2>
+      <p>Choose all the options that matter to you, then click <b>Find my dresses</b> to see matching looks.</p>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="field"><label for="occasion">Occasion</label><select id="occasion"><option value="">Choose an occasion</option><option>Birthday</option><option>Graduation</option><option>Casual Night</option><option>Wedding</option><option>Dinner</option></select></div>
+    <div class="field"><label for="size">Size</label><select id="size"><option value="">Choose a size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option></select></div>
+    <div class="field"><label for="budget">Budget</label><select id="budget"><option value="">Any budget</option><option value="500">Up to ₱500</option><option value="800">Up to ₱800</option><option value="1200">Up to ₱1,200</option></select></div>
+    <div class="field"><label for="style">Style</label><select id="style"><option value="">All styles</option><option>Minimalist</option><option>Elegant</option><option>Trendy</option><option>Romantic</option><option>Classic</option></select></div>
+    <div class="field"><label for="date">Event date</label><input id="date" type="date"></div>
+    <div class="field"><label for="availability">Availability</label><select id="availability"><option value="">Any availability</option><option value="available">Available</option><option value="soon">Coming soon</option></select></div>
+  </div>
+
+  <div class="filter-actions">
+    <button class="find-btn" onclick="findDresses()">Find my dresses →</button>
+    <button class="reset" onclick="resetFilters()">Reset</button>
+    <div class="helper">Your results will appear below after you submit your choices.</div>
+  </div>
+</section>
+
+<section class="results" id="results">
+  <div class="results-head">
+    <div>
+      <p class="eyebrow">YOUR MATCHES</p>
+      <h2>Available dresses for you</h2>
+      <p id="selectionText"></p>
+    </div>
+    <button class="reset" onclick="editFilters()">← Edit filters</button>
+  </div>
+  <div class="grid" id="catalog"></div>
+</section>
 </main>
 
 <div class="modal" id="modal">
@@ -150,14 +77,14 @@ a(max-width:800px){.filters{grid-template-columns:1fr 1fr}.grid{grid-template-co
 <button class="close" onclick="closeModal()">Close</button>
 <h2>Reserve / Inquire</h2>
 <p class="note" id="selected"></p>
-<form onsubmit="submitInquiry(event)">
-<div class="form-row"><label>Name</label><input required placeholder="Your name"></div>
-<div class="form-row"><label>Email</label><input required type="email" placeholder="you@email.com"></div>
+<form id="reservationForm" onsubmit="submitInquiry(event)">
+<div class="form-row"><label>Name</label><input id="customerName" required placeholder="Your name"></div>
+<div class="form-row"><label>Email</label><input id="customerEmail" required type="email" placeholder="you@email.com"></div>
 <div class="form-row"><label>Event date</label><input required id="formDate" type="date"></div>
-<div class="form-row"><label>Message</label><input placeholder="Size, questions, or special requests"></div>
-<button class="submit">Send Inquiry</button>
+<div class="form-row"><label>Message</label><input id="customerMessage" placeholder="Questions or special requests"></div>
+<button class="submit" id="submitBtn">Send Reservation Request</button>
 </form>
-<p class="note">Prototype only: this form demonstrates the reservation flow and does not process payment.</p>
+<p class="note">Your reservation request will be sent to the C-LHOUETTE Gmail inbox. Payment is not processed on the website.</p>
 </div>
 </div>
 
@@ -173,71 +100,90 @@ const dresses=[
 {name:"Midnight Edit",size:["M","L","XL"],occasion:["Casual Night","Dinner"],budget:1100,style:"Trendy",days:[1,6,11,16,20,24,30],availability:"available"},
 {name:"Soft Focus",size:["XS","S","M"],occasion:["Graduation","Birthday"],budget:600,style:"Minimalist",days:[4,8,13,18,23,27],availability:"available"},
 {name:"Rose Theory",size:["M","L"],occasion:["Wedding","Birthday"],budget:800,style:"Romantic",days:[2,5,9,15,19,26],availability:"soon"},
-{name:"City Classic",size:["S","M","L"],occasion:["Casual Night","Party"],budget:700,style:"Classic",days:[3,7,12,17,22,28],availability:"available"}
+{name:"City Classic",size:["S","M","L"],occasion:["Casual Night"],budget:700,style:"Classic",days:[3,7,12,17,22,28],availability:"available"}
 ];
 
-let chosenOccasion="",chosenSize="";
-
-function chooseOccasion(o){
- chosenOccasion=o;
- document.getElementById("occasionChooser").classList.add("hidden");
- document.getElementById("sizeChooser").classList.remove("hidden");
- document.getElementById("catalogSection").classList.add("hidden");
- document.getElementById("step1").classList.remove("active");
- document.getElementById("step2").classList.add("active");
-}
-
-function chooseSize(s){
- chosenSize=s;
- document.getElementById("sizeChooser").classList.add("hidden");
- document.getElementById("catalogSection").classList.remove("hidden");
- document.getElementById("step2").classList.remove("active");
- document.getElementById("step3").classList.add("active");
- render();
-}
-
-function backToOccasions(){
- chosenOccasion="";chosenSize="";
- document.getElementById("occasionChooser").classList.remove("hidden");
- document.getElementById("sizeChooser").classList.add("hidden");
- document.getElementById("catalogSection").classList.add("hidden");
- document.getElementById("step1").classList.add("active");
- document.getElementById("step2").classList.remove("active");
- document.getElementById("step3").classList.remove("active");
-}
-
-function backToSizes(){
- document.getElementById("catalogSection").classList.add("hidden");
- document.getElementById("sizeChooser").classList.remove("hidden");
- document.getElementById("step2").classList.add("active");
- document.getElementById("step3").classList.remove("active");
-}
-
 function matches(d){
- const b=document.getElementById("budget").value,st=document.getElementById("style").value;
- const a=document.getElementById("availability").value,date=document.getElementById("date").value;
- if(!d.occasion.includes(chosenOccasion))return false;
- if(!d.size.includes(chosenSize))return false;
- if(b&&d.budget>Number(b))return false;
- if(st&&d.style!==st)return false;
- if(a&&d.availability!==a)return false;
+ const o=document.getElementById("occasion").value,s=document.getElementById("size").value,b=document.getElementById("budget").value,st=document.getElementById("style").value,a=document.getElementById("availability").value,date=document.getElementById("date").value;
+ if(o && !d.occasion.includes(o)) return false;
+ if(s && !d.size.includes(s)) return false;
+ if(b && d.budget>Number(b)) return false;
+ if(st && d.style!==st) return false;
+ if(a && d.availability!==a) return false;
  if(date){const day=new Date(date+"T00:00:00").getDate();if(!d.days.includes(day))return false;}
  return true;
 }
 
-function render(){
- const list=dresses.filter(matches),cat=document.getElementById("catalog");
- document.getElementById("selectionText").textContent=`Showing ${chosenOccasion} dresses available in size ${chosenSize}. You can narrow the results further below.`;
- cat.innerHTML=list.length?list.map(d=>`<article class="card"><div class="photo"><span>Sample product image<br><b>${d.name}</b></span></div><div class="info"><div class="name">${d.name}</div><div class="meta">${d.style} • ${d.occasion.join(" / ")}<br>Available in: ${d.size.join(", ")} • ${d.availability==="available"?"Available":"Coming soon"}</div><div class="price">₱${d.budget.toLocaleString()} / event</div><button class="reserve" onclick='openModal(${JSON.stringify(d.name)})'>Reserve / Inquire</button></div></article>`).join(""):`<div class="empty">No dresses match your ${chosenOccasion} + size ${chosenSize} selection.<br>Try another size or use the extra filters below.</div>`;
+function findDresses(){
+ const required=["occasion","size"];
+ const missing=required.some(id=>!document.getElementById(id).value);
+ if(missing){alert("Please choose your occasion and size first.");return;}
+ document.getElementById("results").classList.add("show");
+ render();
+ document.getElementById("results").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-function openModal(name){
- document.getElementById("selected").textContent=`You're asking about: ${name} • ${chosenOccasion} • Size ${chosenSize}`;
- document.getElementById("modal").classList.add("open");
+function render(){
+ const list=dresses.filter(matches),cat=document.getElementById("catalog");
+ const o=document.getElementById("occasion").value,s=document.getElementById("size").value,b=document.getElementById("budget").value,st=document.getElementById("style").value,date=document.getElementById("date").value,a=document.getElementById("availability").value;
+ let summary=`Showing dresses for ${o}, size ${s}`;
+ if(b)summary+=`, up to ₱${Number(b).toLocaleString()}`;
+ if(st)summary+=`, ${st.toLowerCase()} style`;
+ if(date)summary+=`, for your selected event date`;
+ if(a)summary+=`, ${a==="available"?"available now":"coming soon"}`;
+ document.getElementById("selectionText").textContent=summary+".";
+ cat.innerHTML=list.length?list.map(d=>`<article class="card"><div class="photo"><div class="dress-shape"><div class="dress-top"></div><div class="dress-skirt"></div></div><div class="photo-label">Dress photo placeholder • replace with actual product photo</div></div><div class="info"><div class="name">${d.name}</div><div class="meta">${d.style} • ${d.occasion.join(" / ")}<br>Available in: ${d.size.join(", ")} • ${d.availability==="available"?"Available":"Coming soon"}</div><div class="price">₱${d.budget.toLocaleString()} / event</div><button class="reserve" onclick='openModal(${JSON.stringify(d.name)})'>Reserve / Inquire</button></div></article>`).join(""):`<div class="empty">No dresses match all of your selected options.<br>Try changing your size, budget, style, date, or availability.</div>`;
 }
+
+function editFilters(){document.querySelector(".filter-panel").scrollIntoView({behavior:"smooth",block:"start"})}
+function resetFilters(){["occasion","size","budget","style","date","availability"].forEach(id=>document.getElementById(id).value="");document.getElementById("results").classList.remove("show");document.querySelector(".filter-panel").scrollIntoView({behavior:"smooth",block:"start"})}
+function openModal(name){document.getElementById("selected").textContent=`You're asking about: ${name} • ${document.getElementById("occasion").value} • Size ${document.getElementById("size").value}`;document.getElementById("reservationForm").dataset.dress=name;document.getElementById("formDate").value=document.getElementById("date").value;document.getElementById("modal").classList.add("open")}
 function closeModal(){document.getElementById("modal").classList.remove("open")}
-function submitInquiry(e){e.preventDefault();alert("Inquiry submitted! (Demo only)");closeModal();e.target.reset()}
-["budget","style","availability","date"].forEach(id=>document.getElementById(id).addEventListener("change",render));
+
+// After you create the free Google Apps Script email receiver, paste its Web App URL here.
+// Example: https://script.google.com/macros/s/XXXXXXXXXXXX/exec
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzE3i3KJI9BneKa1tklbuKULHbtxJoQrg2c5NffoIzw0wKDnWvDn9_iVuabGwx9FL56/exec";
+
+async function submitInquiry(e){
+  e.preventDefault();
+  const form=e.target;
+  const submitBtn=document.getElementById("submitBtn");
+  const dress=form.dataset.dress || "Selected dress";
+  const data={
+    customerName:document.getElementById("customerName").value.trim(),
+    customerEmail:document.getElementById("customerEmail").value.trim(),
+    eventDate:document.getElementById("formDate").value,
+    message:document.getElementById("customerMessage").value.trim(),
+    dressName:dress,
+    occasion:document.getElementById("occasion").value,
+    size:document.getElementById("size").value,
+    budget:document.getElementById("budget").value ? "₱"+Number(document.getElementById("budget").value).toLocaleString() : "Any budget",
+    style:document.getElementById("style").value || "All styles",
+    availability:document.getElementById("availability").value || "Any availability"
+  };
+
+  if(GOOGLE_APPS_SCRIPT_URL.includes("PASTE_YOUR")){
+    alert("The reservation form is ready, but the Gmail connection still needs to be set up. Once the Google Apps Script Web App URL is added, requests will be sent to princessizzy.uy.comm@ust.edu.ph.");
+    return;
+  }
+
+  submitBtn.disabled=true;
+  submitBtn.textContent="Sending request...";
+  try{
+    // Google Apps Script Web Apps can receive URL-encoded POST data from the static GitHub Pages site.
+    // no-cors is used because the receiver is on a different Google domain.
+    const body=new URLSearchParams(data);
+    await fetch(GOOGLE_APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",body});
+    alert("Reservation request sent! C-LHOUETTE will review your request and contact you by email.");
+    closeModal();
+    form.reset();
+  }catch(err){
+    alert("We couldn't send the reservation request. Please try again or contact C-LHOUETTE directly.");
+  }finally{
+    submitBtn.disabled=false;
+    submitBtn.textContent="Send Reservation Request";
+  }
+}
 </script>
 </body>
 </html>
